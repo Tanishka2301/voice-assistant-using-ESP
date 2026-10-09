@@ -1,0 +1,59 @@
+#include <WiFi.h>
+#include <HTTPClient.h>
+
+const char* ssid = "Redmi Note 9 Pro";
+const char* password = "qwertyuiop";
+
+const char* serverURL =
+    "http://10.24.198.111:8000/start";
+
+void setup() {
+
+  Serial.begin(115200);
+
+  Serial.println();
+  Serial.println("==============================");
+  Serial.println(" ESP32-S3 Voice Assistant");
+  Serial.println("==============================");
+
+  WiFi.begin(ssid, password);
+
+  Serial.print("Connecting to Wi-Fi");
+
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println();
+  Serial.println("Wi-Fi connected!");
+
+  Serial.print("ESP32 IP: ");
+  Serial.println(WiFi.localIP());
+
+  // Wait a moment for laptop server
+  delay(2000);
+
+  Serial.println("Starting voice assistant...");
+
+  HTTPClient http;
+
+  http.begin(serverURL);
+
+  int responseCode = http.GET();
+
+  Serial.print("Laptop response code: ");
+  Serial.println(responseCode);
+
+  if (responseCode > 0) {
+    Serial.println(http.getString());
+  } else {
+    Serial.println("Could not connect to laptop.");
+  }
+
+  http.end();
+}
+
+void loop() {
+  // Nothing needed here
+}
