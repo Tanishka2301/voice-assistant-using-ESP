@@ -1,0 +1,26 @@
+Its a low cost, low powered system on a chip , micro controller(A microcontroller is a small computer built onto a single chip to control electronic devices.) created by Espressif system that features integrated bluetooth and wifi.It can
+  1)Read input from sensors and microphones.
+  2)Process instructions using its CPU cores.
+  3)Connect to Wi-Fi and Bluetooth.
+  4)Control LEDs, motors, and other devices.
+>>Processor:- Dual core CPU or single core ,32 bit microprocessor running upto 240 Mhz(One instruction may take one clock cycle or multiple cycles, depending on the processor and instruction). 
+>>Connectivty :- Built in 2.4 GHz Wifi and  BLuetooth BLE/Classic.
+>>Power management:- very low power consumption.
+>>Peripherals: 
+      -Set of GPIO(General-Purpose Input/Output) pins,Used to read inputs or control outputs.Ex:- Read a button press or turn an LED on.Read Digital Sensors:-Interfacing with motion detectors,temp sensor , humidity sensor to gather real data : Output: Triggering leds,sounding buzzers.
+      -ADC(analog to Digital Converters) ,Real-Life Example: Reading a Potentiometer or Temperature Sensor (like LM35).
+      -DAC ( Digital to Analog Converters) ,Real-Life Example: Playing Music through an Audio Speaker or Generating Audio Tones.
+      -I2C(Inter-Integrated Circuit)- used to connect devices like OLED screens or digital environmental sensors (ex- temperature, pressure, and humidity sensor) using only those two wires (SDA for data and SCL for the clock signal).
+      -UART(Universal Asynchronous Receiver-Transmitter)-Transfers serial data between devices using TX (transmit) and RX (receive) lines.
+      -SPI(Serial Peripheral Interface)-that demand fast data transfers—like colorful TFT display screens, SD cards, or external flash memory.
+      -PWM (Pulse Width Modulation) -Controlling LED brightness or motor speed.
+      -Timers and counters
+      -I²S (Inter-IC Sound) - Transfers digital audio between compatible devices.
+      -Touch sensing - Detects changes in capacitance when a finger approaches or touches a supported touch pad.
+      -Watchdog timer - Helps recover a system if software gets stuck and fails to respond within the required time.
+
+>>Programming:- Arduino IDE, micropython, circuitpython , native ESP- IDE.
+>>Uses:- IOT.
+>>Clock Speed:- Running upto 240 MHz.
+>>SRAM Memory - static random access memory - 520 KB of internal RAM.
+>>Flash Memory : 4 to 16 MB.
