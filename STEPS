@@ -1,0 +1,40 @@
+In Zorin OS and DEll laptop
+
+1) Step 1 — Open Terminal and install the required system software
+Copy-paste this one command:>> sudo apt update && sudo apt install -y python3 python3-pip python3-venv ffmpeg portaudio19-dev
+  -sudo apt update - Updates Zorin's list of available software packages.
+  -sudo apt install - Installs the tools your voice-assistant needs:
+  -ffmpeg- needed by whisper
+  -portaudio- helps sounddevice communicate with microphone
+  -python3-venv - creates seperate python environment
+  -python3 - runs your python program
+
+2)Step 2 — Put your Python file on the Zorin laptop
+>>mkdir ~/GeminiVoiceAssistant                                   //Create a project folder:
+>>cd ~/GeminiVoiceAssistant                                      //change directory
+/home/YOUR_USERNAME/GeminiVoiceAssistant/voice_assistant.py
+
+Step 3 — Create Python environment
+Inside the project folder, make a seperate project python environment, all libraries will be installed inside it 
+python3 -m venv venv
+
+Then activate it:
+source venv/bin/activate
+
+Step 4 — Install everything your program needs , With (venv) active, run:
+pip install numpy scipy sounddevice openai-whisper google-genai pyttsx3
+
+   # Library	What it does in your project
+   - sounddevice	🎤 Captures audio from the microphone
+   - numpy	📊 Processes the microphone audio data and calculates volume/threshold
+   - scipy	💾 Saves the recorded audio as a .wav file
+   - openai-whisper	🗣️ Converts your recorded speech → text
+   - google-genai	🧠 Sends your text to Gemini and gets the AI response
+   - pyttsx3	🔊 Converts Gemini's text response → spoken audio
+                                    |-->voice_assistant.py 
+        |--> GeminiVoiceAssistant --|-->venv--libraries
+files --|-->                         
+        |-->Python Normal
+
+Step 5:nano voice_assistant.py
+Step 6:python3 voice_assistant.py
