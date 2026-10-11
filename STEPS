@@ -36,5 +36,13 @@ pip install numpy scipy sounddevice openai-whisper google-genai pyttsx3
 files --|-->                         
         |-->Python Normal
 
-Step 5:nano voice_assistant.py
-Step 6:python3 voice_assistant.py
+Step 5:nano voice_assistant.py    //create file and save
+Step 6:python3 voice_assistant.py 
+
+
+step 7: Activate your virtual environment :  
+pip install fastapi uvicorn
+Create your FastAPI server file:  nano server.py
+Start the FastAPI server
+Run this command in the same terminal:uvicorn server:app --host 0.0.0.0 --port 8000
+Open your browser on the laptop and visit: http://127.0.0.1:8000
