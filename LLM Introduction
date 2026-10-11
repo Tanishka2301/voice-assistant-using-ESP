@@ -1,13 +1,13 @@
->>LLM is a AI model(based on neural network) Designed to understand and generate human language. ex- gemini , gpt, llama.These take input, process and generates output.
+>>LLM is a AI model(based on neural network) , Designed to understand and generate human language. ex- gemini , gpt, llama.These take input, process and generates output.It dosnt web search , it predicts based on what it has learned.
 Its trained on huge amount of text.ex- the sun rises in the ____. It can predicts easily what comes next.Model assigns probablities to the tokens. LLM calculates the mathematical probability of every word in its vocabulary and picks the most likely next word.
   • Pre-training: The model reads billions of pages of text from the internet (books, articles, websites). It learns grammar, facts, and how words relate to each other by constantly guessing the hidden next word in a sentence.
   • Fine-Tuning: Human trainers guide the model to make it helpful and safe. It learns to follow instructions (like "summarize this") instead of just randomly continuing a sentence.
 >>Processing :-
-  -Tokenization: The LLM breaks your sentence down into smaller pieces called tokens (words or parts of words). It cannot read full words like humans do.ex- "'Hello' ',' 'how' 'are' 'you'?" .tokenization depends on the model we use.
-  -Vector Conversion: It turns these tokens into long lists of numbers (called embeddings). These numbers represent the meaning and context of your words.ex- "I love india". //vector for I -->[0.01 ,0.59,0.56,0.6,0.2]  , vector for love --> [0.44,0.25,0.54,0.54,068].Different llm models (and also different tokenizer), can have different vectors.
-  -Context Analysis:Transformer, the model analyzes how every word in your prompt relates to every other word to fully understand what you are asking.ex- man picks up ball , becoz it was small ,here "it" contexts to ball or man. Tells importance of tokens.
-  -Prediction
->>Parameters:are the internal settings or "knobs" that the model adjusts during training to learn the relationships between words, think it as the neurons or connections in a digital brain.• Having more parameters means the model can create a much more detailed map of how all those words and concepts relate to one another.
+  -1)Tokenization: The LLM breaks your sentence down into smaller pieces called tokens (words or parts of words). It cannot read full words like humans do.ex- "'Hello' ',' 'how' 'are' 'you'?" .tokenization depends on the model we use.
+  -2)Vector Conversion: It turns these tokens into long lists of numbers (called embeddings). These numbers represent the meaning and context of your words.ex- "I love india". //vector for I -->[0.01 ,0.59,0.56,0.6,0.2]  , vector for love --> [0.44,0.25,0.54,0.54,068].Different llm models (and also different tokenizer), can have different vectors.
+  -3)Context Analysis:Transformer, the model analyzes how every word in your prompt relates to every other word to fully understand what you are asking.ex- man picks up ball , becoz it was small ,here "it" contexts to ball or man. Tells importance of tokens.
+  -4)Prediction
+>>Model Parameters:are the internal settings or "knobs" that the model adjusts during training to learn the relationships between words, think it as the neurons or connections in a digital brain.• Having more parameters means the model can create a much more detailed map of how all those words and concepts relate to one another.
  How Parameters Work :-
   •Weights and Biases: A parameter is essentially a mathematical number (a weight). When you give the model a prompt, the text is converted into numbers and multiplied by these billions of parameters to calculate the most logical next word.
   •The Learning Process: During training, the model starts with random parameters and makes mistakes. As it reads text, it tweaks these billions of numbers until it can accurately predict the correct words. Once training is done, these parameters are frozen.
@@ -15,7 +15,6 @@ Its trained on huge amount of text.ex- the sun rises in the ____. It can predict
 >>Speech Recognisation & LLM :- llm converts only text to intelligent text.
 
 >>Open-Source:- are publicly released for anyone to download, inspect, run locally, and modify ,Unlike closed-source or proprietary models (like OpenAI's GPT series or Anthropic's Claude), which are locked behind paid APIs and treated as corporate secrets, open-source models give developers full visibility and control.
-
 >>Local LLM:- These models that can be run offline , download it ,run it locally , rather hten sending request to commercial cloud API.ex- llama, mistral. 
 
 >>                           Cloud LLM         |   Local LLM
@@ -24,6 +23,44 @@ Its trained on huge amount of text.ex- the sun rises in the ____. It can predict
    -setup             easy                     |   not required
    -cost              may have API cost        | only hardware , electricity 
 
+>>Prediction:- depends on training data  ,prompt, temperature(Creativity), max token length.Tokens with highest probabloty is not always chosen , thats because of sampling strategies & decoding settings like :- temp , top p , top k , min p )
+>Sampling parameters (Settings):-These control how the model selects tokens while generating a response.Think of them as knobs you adjust when using the model, without retraining it.Examples: Temperature, Top-K, Top-P and Min-P.
+   Temperature :-Controls how sharply or evenly probabilities are distributed during sampling.controls randomness
+     Low temperature: more predictable choices, almost always pick the top most token, strong peak probablity distribution.
+     High temperature: more diverse choices,weak peak probablity distribution.
+   Top-K:-Keeps only the K highest-ranked candidate tokens before sampling.
+     Ex-Top-K = 3 means sampling among the three highest-ranked candidates.
+   Top-P (nucleus sampling):- Keeps the smallest set of highest-probability tokens whose cumulative probability reaches the chosen threshold.
+     Ex-let Top-P = 0.90 ,then keeps a candidate set covering approximately 90% of the probability mass.
+   Min-P :-Removes tokens whose probability is too low relative to the highest-probability token.
+     Example: Min-P = 0.1, then calculate 10% of the highest token's probability, then remove token less then that relative cutoff.
+
+
+DAY 2:- 
+>>open source llm:- can be used freely.
+>>Hugging face - a platform for posting your ml models, dataset and toolsets.Like github, but for AI model, runnning AI applicatinos direclty from the browser via spaces.It includess:-
+   - Models -LLm , Like GPT2, Mistral , LLama.
+   -Datasets - IMDB, ,Squad.
+   -Spaces - Web Applaiction using hugging face models.
+   - Inference API- test models directly in the browser or through API . Using a Trained AI model for prediction or generate result.Problem can arrive that cpu works or not.
+>>What happens is that :-
+  1) Choose  a model:- ex- gpt2,mistralai etc.
+  2) Hugging Face host that model on their own powerful GPU's.
+  3)We make a API call to https://api - infernce.huggingface.com/models/modelname
+  4) ask query to api, and api give the output, ( API is hte interface to connect to llm).
+
+>>CPU/ GPU :- 
+ CPU:- has 4 - 16 cores,each core is the mini brain inside your processor ,each core can do one task at a time.
+ GPU:- has 1000 of cores, so ai runs better in it, performing activities like multiplication of matrices, repeating this million of times , moe coes you have, more task can be done simultaneously. 
+
+>>Small LLM Models can be run on cpu,ex- distilBERT, TinyLlmaa, GPT2 small, Mistral -78 , can do task like - text classification, question answering, basic text answering, sentiment analysis.
+
+>>Quanitzed Model:-it reduces the model size by storing number with low precision(ex- int4 instead of float32) making them :- faster to load, lighter in size.
+
+>>Model Parameter:-paramter are no. of the model learns during training,GPT2- 124 million parameters, GPT 3 175 billion parameters.parameter is hte leanred number, the model uses to generete.Parameter is always no. (value) usually a weight , value stored inside the model. 
+ >weight-how important thing is-ex- great = 0.87, happy =0.59.
+ >value- avtual no. stored in model 
+ >Rule-a learnt pattern or decision the model makes.
 
 
 
