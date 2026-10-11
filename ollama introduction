@@ -1,0 +1,70 @@
+Ollama is a CLI (command line interface) tool that makes it easy to run open source llms, its like docker for llm, supports model like Msitral ,LLAMA 3, Gemma, code llama etc. 
+
+>>Install:-
+1)install WSL(window subsytem for linux,its feature of wndows that allows users to run a linux environment directly on Windows wohtout need for visual machien or dual booting) - https://docs.microsoft.com/en-us/window/wsl/install
+2) OR winget install --id Ollama.Ollama      write in terminal for windows 
+curl -fsSL https:ollama.com/install.sh | sh  write in terminal for mac/linux
+
+>>Use , in terminal:-
+-ollama
+-ollama run tinyllama - (to run small model called tinyllama, it is only of 686MB)
+-ask question   - What is artificial intelligence?
+-/bye 
+
+>>use ollama via api (our Python code, Node.js program, or another application sends a request to the model and receives its response.)Suppose you're building your ESP32 voice assistant.With direct chat, you type a question manually.With the API, your Python program can send the transcribed speech to Ollama and receive the AI's answer automatically.
+- by default , it runs on http://localhost:11434/api/generate
+
+Paste in temrinal to test :curl.exe -X POST "http://localhost:11434/api/generate" -H "Content-Type: application/json" -d "{\"model\":\"tinyllama\",\"prompt\":\"What is the capital of India?\",\"stream\":false}"
+
+In python :-
+1)First install the required library in CMD: py -m pip install requests
+2)Usually, Ollama starts automatically in the background when you install and launch it on Windows.
+3)Then run your Python file: py ask_ai.py
+4)Python code:-
+  
+import requests
+
+response = requests.post(
+    "http://localhost:11434/api/generate",
+    json={
+        "model": "tinyllama",
+        "prompt": "What is the capital of India?",
+        "stream": False
+    }
+)
+
+answer = response.json()["response"]
+print(answer)
+
+>Example :
+1)You speak
+2)ESP32 sends audio to laptop
+3)Python converts speech into text
+4)Using speech recognition, such as Whisper
+5)Python calls the Ollama API
+6)Sends the question to TinyLlama
+7)Python receives the AI answer
+8)Text-to-speech reads the answer aloud
+
+>>Modelfile:- in Ollama is like a set of instructions for creating your own customized model from an existing model.
+1. Create a Modelfile on Windows :Open Notepad and write:  (File name: Modelfile , Save as type: All Files  ,Choose a folder, such as C:\OllamaTest  )
+  FROM tinyllama
+  SYSTEM "You are a friendly AI assistant. Explain computer science concepts in simple English and use short examples."
+  PARAMETER temperature 0.7
+2. Use your Modelfile
+  Open CMD:
+  cd C:\OllamaTest
+  ollama create myassistant -f Modelfile       //This creates a customized Ollama model named myassistant.
+  ollama run myassistant                        //this run the modelfile
+  Explain Python loops to me.                   //Ask a question, Your model will follow the system instructions you added, as far as its capabilities allow.
+3.You can use your custom model through the same API as before. Just change the model name in your Python code, 
+     "model": "myassistant",
+
+>>Feature               Hugging Face                                             Ollama
+What is it?      Platform and AI libraries                                 Software for running LLMs
+Main purpose   Discover, download, develop and use AI models               Download and run models locally
+Example model  GPT-2, Mistral                                              TinyLlama, Llama
+How to use     Python with transformers                                    Terminal commands or API
+Coding required? Often, for custom use                                     Not necessary for basic chat
+Runs locally?  Yes, with downloaded models                                 Yes, by default
+Model customization- Python, fine-tuning and other tools                    Modelfile for system prompts and settings
