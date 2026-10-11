@@ -1,0 +1,47 @@
+Record your voice
+      ↓
+Wait for 5 seconds of silence
+      ↓
+Save audio → Whisper converts it to text
+      ↓
+Did you say "exit", "quit", or "stop"?
+      ↓
+   ┌──┴──┐
+  YES    NO
+   ↓      ↓
+Program  Gemini generates
+ends     an answer
+            ↓
+       Speaks the answer
+            ↓
+       Returns to the
+       beginning 
+
+
+
+
+
+
+
+         Start recording
+                ↓
+       Read audio continuously
+                ↓
+         Has voice started?
+          ↙           ↘
+         No            Yes
+         ↓              ↓
+  Keep waiting     Check silence
+                        ↓
+              ┌─────────┴─────────┐
+         Sound detected      Silence detected
+              ↓                    ↓
+        Keep recording      Count silence time
+                                   ↓
+                         5 seconds reached?
+                           ↙          ↘
+                         No            Yes
+                         ↓              ↓
+                    Keep reading   Stop recording
+                                      ↓
+                                Save and process
