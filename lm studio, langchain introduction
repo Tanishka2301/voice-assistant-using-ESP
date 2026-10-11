@@ -1,0 +1,64 @@
+LM Studio is another tool for running AI language models locally on your laptop. Think of it as a desktop application where you can download a model, chat with it, and run a local API without needing to write Python code first.
+Run models locally using a graphical interface (GUI), with an API option too.
+Step 1 — Install ,Download it from the official 
+Step 2 — Download a model-Open Discover, search for a small model, and download a suitable version. This uses laptop storage. 
+Step 3 — Open the Chat tab, load your downloaded model, and ask a question. You don't need Python or terminal commands for basic chatting.
+>>Preset:-is a saved collection of settings that controls how the model generates its answers.Think of it as a ready-made configuration that you can reuse.
+   Temperature: Controls randomness.
+   Top-K / Top-P: Controls which candidate tokens can be selected.
+   System prompt: Instructions about how the model should behave, if included in that preset.
+   Other generation settings supported by the application.
+>>To use api 
+  go to developer - make status running - develpoer mode on.
+  it shows the port no. like , http://127.0.0.1:1234 , where it running ,now we can access any api. 
+
+#Langchain:-
+
+Its framework (liek react) that helps you build llm -powered application using small building blocks like llms, prompt, memory , tools, api, chains,agents.
+LangChain is a Python framework that helps you connect an AI model with other tools, data, and workflows.LangChain is an open-source orchestration framework designed to simplify the development of applications powered by Large Language Models (LLMs). Launched in October 2022 by Harrison Chase, it provides a standardized, model-agnostic architecture available in both Python and JavaScript/TypeScript, allowing developers to seamlessly link LLMs to external data sources, memory, and computational tools
+
+key components of LangChain:-
+
+1. Prompt Templates — Instructions : A reusable format for telling the AI what to do.
+Example: "Explain {topic} in simple English." If topic = TCP, the template becomes: “Explain TCP in simple English.”
+2. Models — The AI brain :The model generates responses based on the input.
+Examples: OpenAI models accessed through the API, or a local model served by LM Studio.
+3. Chains — Connecting steps : A chain connects components so that one step's output goes to the next step.
+Example: Prompt → Model → Output parser.
+4. Retrievers — Finding relevant information : A retriever searches a collection of documents and returns relevant content for the question.
+Example: Find the TCP congestion-control explanation in your class notes.
+5. Tools — Actions the AI application can use :Tools let an AI application perform tasks through functions or services.
+Examples: a calculator, a database search, or a weather API.
+6. Memory / Chat History — Remembering the conversation :Conversation history allows the model to use earlier messages as context.
+Example: You ask “Explain TCP,” then “Give an example.” The assistant can use the earlier topic to understand your follow-up.
+In modern LangChain applications, chat history is often managed explicitly or through components such as checkpointers, rather than relying on one universal memory feature.
+7. Output Parsers — Formatting the answer :They convert a model's response into a useful format, such as plain text, a list, or structured JSON.
+Example: Extract the AI's answer as a normal string to display on your website.
+
+Example :“Explain TCP using my notes.”   (This type of document-based question-answering system is often called RAG (Retrieval-Augmented Generation))
+1)User queries : plain TCP using my notes.
+2)Retriever : Finds relevant TCP notes.   
+3)Prompt template :Combines the question, notes, and instructions. 
+4)AI model :Generates the explanation. 
+5)Output parser : Returns the answer in the required format.   
+
+>>This example uses the same Node.js + OpenAI setup you were learning.
+import { ChatOpenAI } from "@langchain/openai";
+import { ChatPromptTemplate } from "@langchain/core/prompts";
+import { StringOutputParser } from "@langchain/core/output_parsers";
+
+const model = new ChatOpenAI({
+  model: "gpt-4o-mini",
+});
+
+const prompt = ChatPromptTemplate.fromTemplate(
+  "Explain {topic} in simple English."
+);
+
+const chain = prompt.pipe(model).pipe(new StringOutputParser());
+
+const answer = await chain.invoke({
+  topic: "TCP",
+});
+
+console.log(answer);
