@@ -55,14 +55,56 @@ DAY 2:-
 
 >>Small LLM Models can be run on cpu,ex- distilBERT, TinyLlmaa, GPT2 small, Mistral -78 , can do task like - text classification, question answering, basic text answering, sentiment analysis.
 
->>Quanitzed Model:-it reduces the model size by storing number with low precision(ex- int4 instead of float32) making them :- faster to load, lighter in size.
-
+>>Quantized Model:-it reduces the model size by storing number with low precision(ex- int4 instead of float32) making them :- faster to load, lighter in size, so can be easily run on cpu.
+   
 >>Model Parameter:-paramter are no. of the model learns during training,GPT2- 124 million parameters, GPT 3 175 billion parameters.parameter is hte leanred number, the model uses to generete.Parameter is always no. (value) usually a weight , value stored inside the model. 
  >weight-how important thing is-ex- great = 0.87, happy =0.59.
- >value- avtual no. stored in model 
+ >value- actual no. stored in model 
  >Rule-a learnt pattern or decision the model makes.
 
+>>Model Size:-Each parameter is a no. usually stored as float32( 4 bytes), int8( 1 bytes),int4( 0.5 bytes).
+Model size= no. of parameters * size of each parameter
+ex- GPT2 =124M * float32(4 bytes) => 496MB.  
+   • 1B-7B    - light weight model
+   • 13B-30B  - mid size
+   • 65B-150B - large model size
 
+HUGGING FACE:-
+>>naming convention:include architecture, size , quantisation & vesion. ex- TheBLoke/Mistral-7B-Instruct-v0.1-GGUI
+here in example , we have organisation name, base model organiser ,model size, instruction tuned version, file format used in quantisation.
 
+>>  Use Cases            -  Example  model
+   •Chatbot              -  mistralai/mistral-78-instruct
+   •summarization        -  facebook/bart-large0-cnn
+   •code generation      -  salesforce/codegen-2B
+   •Hindi LLm            -  ai4bharat/indicbart
+   •Quantised Model      -  Thebloke/Mistral-7B-GGUF
 
+>>The Hingface transformers library is a highly popular, open-source Python framework developed by Hugging Face. It serves as the primary ecosystem hub for downloading, training, and deploying state-of-the-art pretrained machine learning models across multiple modalities, including text, vision, audio, and multimodal tasks
+>>in google collab just write:-
+>>
+# Step 1: Install the library
+# Run this command in your terminal, not as Python code:
+# pip install transformers
 
+# Step 2: Import pipeline
+from transformers import pipeline
+
+# Step 3: Create a text-generation pipeline
+generator = pipeline("text-generation", model="gpt2")              //it downlaods the gpt2 ,(in google collab , if we use termianl then it gets downlaoded on pc, and takes storage , ( very first time  when we pass this gpt2) , then only.
+
+# Step 4: Generate text
+output = generator(                         //Stores the result returned by the pipeline
+    "Bharat ka AI future",                  //Your input prompt
+    max_length=50,                          //max_length=50  Maximum total length of the generated sequence, including the prompt, measured in tokens
+    num_return_sequences=1                  //num_return_sequences=1 Generate one output sequence
+)
+
+# Step 5: Print the generated text
+print(output[0]["generated_text"])
+#The result is typically a list containing a dictionary, similar to:
+[
+    {
+        "generated_text": "Bharat ka AI future ..."
+    }
+]
