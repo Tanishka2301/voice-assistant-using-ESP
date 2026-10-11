@@ -19,6 +19,10 @@ Its a low cost, low powered system on a chip , micro controller(A microcontrolle
       -Touch sensing - Detects changes in capacitance when a finger approaches or touches a supported touch pad.
       -Watchdog timer - Helps recover a system if software gets stuck and fails to respond within the required time.
 
+{ >UART (Point-to-Point): Typically connects just two devices directly using two crossover wires (TX to RX, and RX to TX). Adding multiple peripherals requires complex software routing or hardware multiplexing.
+  >SPI and I2C (Bus Architecture): Both allow multiple devices to share the same bus lines, but they handle device selection differently:
+      -SPI uses individual, dedicated Chip Select (CS) lines from the master for every single peripheral connected.
+      -I2C uses software addressing over just two shared wires (SDA and SCL), meaning every peripheral chip has a built-in unique hardware address so the master can call them individually on the same wire.
 >>Programming:- Arduino IDE, micropython, circuitpython , native ESP- IDE.
 >>Uses:- IOT.
 >>Clock Speed:- Running upto 240 MHz.
